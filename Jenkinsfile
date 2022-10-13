@@ -1,24 +1,9 @@
 pipeline {
-    agent any
-
+    agent { docker { image 'maven:3.8.6-openjdk-11-slim' } }
     stages {
-        stage ('Compile Stage') {
-
+        stage('build') {
             steps {
-                withMaven(maven : 'maven_3_5_0') {
-                    sh 'mvn clean compile'
-                }
-            }
-        }
-
-       
-
-
-        stage ('Deployment Stage') {
-            steps {
-                withMaven(maven : 'maven_3_5_0') {
-                    sh 'mvn deploy'
-                }
+                sh 'mvn --version'
             }
         }
     }
